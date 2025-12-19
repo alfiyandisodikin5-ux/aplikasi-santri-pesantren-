@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>website santri modern</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+   <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #10b981;
+            --text-gray: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            /* Background Baru: Soft Glassmorphism Look */
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: var(--primary);
+            color: white;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            color: var(--accent);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        /* Menu yang bisa diklik */
+        .sidebar nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 15px;
+            display: block;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer; /* Biar ada icon tangan saat diarahkan mouse */
+            transition: 0.3s;
+        }
+
+        .sidebar nav a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .sidebar nav a.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        /* Bagian Konten (Default: Sembunyi semua kecuali yang aktif) */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Styling Kartu */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+
+        .badge-success { background: #dcfce7; color: #15803d; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>SANTRI APP v1.0</h2>
+        <nav id="sidebar-nav">
+            <a onclick="showTab('dashboard')" id="btn-dashboard" class="active"><i class="fas fa-home"></i> Dashboard</a>
+            <a onclick="showTab('hafalan')" id="btn-hafalan"><i class="fas fa-book-open"></i> Hafalan</a>
+            <a onclick="showTab('jadwal')" id="btn-jadwal"><i class="fas fa-calendar-alt"></i> Jadwal Kajian</a>
+            <a onclick="showTab('syahriah')" id="btn-syahriah"><i class="fas fa-wallet"></i> Syahriah</a>
+            <a onclick="showTab('profil')" id="btn-profil"><i class="fas fa-user"></i> Profil</a>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        
+        <div id="dashboard" class="tab-content active">
+            <h1>Beranda Utama</h1>
+            <p>Selamat datang kembali di sistem informasi santri.</p>
+            <div class="card">
+                <h3>Pengumuman Hari Ini</h3>
+                <p style="margin-top:10px; color: var(--text-gray);">Jangan lupa membawa kitab kuning pada pengajian jam 8 malam nanti.</p>
+            </div>
+        </div>
+
+        <div id="hafalan" class="tab-content">
+            <h1>Progress Hafalan</h1>
+            <div class="card">
+                <p><strong>Terakhir Setoran:</strong> Surah Al-Waqi'ah (Ayat 1-30)</p>
+                <p><strong>Status:</strong> <span class="badge-success">Lancar (Mutqin)</span></p>
+                <hr style="margin: 15px 0; border: 0.5px solid #eee;">
+                <button style="padding: 10px; background: var(--accent); color: white; border: none; border-radius: 5px;">Tambah Setoran Baru</button>
+            </div>
+        </div>
+
+        <div id="jadwal" class="tab-content">
+            <h1>Jadwal Kajian</h1>
+            <div class="card">
+                <p>1. <strong>Subuh:</strong> Tafsir Jalalain</p>
+                <p>2. <strong>Dhuha:</strong> Fiqih Ibadah</p>
+                <p>3. <strong>Maghrib:</strong> Akhlak Lil Banin</p>
+            </div>
+        </div>
+
+        <div id="syahriah" class="tab-content">
+            <h1>Pembayaran Syahriah</h1>
+            <div class="card">
+                <p>Bulan Desember 2025: <strong>Rp 150.000</strong></p>
+                <p>Status: <span class="badge-success">Sudah Lunas</span></p>
+            </div>
+        </div>
+
+        <div id="profil" class="tab-content">
+            <h1>Profil Santri</h1>
+            <div class="card">
+                <p><strong>Nama:</strong> Akhmad Mujahid</p>
+                <p><strong>NIS:</strong> 2025001</p>
+                <p><strong>Kamar:</strong> Al-Farabi 04</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // 1. Sembunyikan semua konten tab
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // 2. Hapus status 'active' dari semua tombol menu
+            const links = document.querySelectorAll('#sidebar-nav a');
+            links.forEach(link => link.classList.remove('active'));
+
+            // 3. Tampilkan konten yang dipilih
+            document.getElementById(tabId).classList.add('active');
+
+            // 4. Tambahkan status 'active' ke tombol yang diklik
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
